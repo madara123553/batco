@@ -195,45 +195,42 @@
         <div class="referral-link" id="referralLink">
             <!-- Referral link will be displayed here -->
         </div>
-        <a id="https://t.me/tapper_swap_bot/tapcoin" href="index.html" target="_blank" style="display:none;">
+        <a id="openBotLink" href="https://t.me/bats_coins_bot" target="_blank" style="display:none;">
             <button id="copyLinkButton">Copy Link & Open Bot</button>
         </a>
     </div>
     
-    
-
+    <!-- Script for Invite Button -->
     <script>
-       // Generate Referral Link and Copy it
-document.getElementById('inviteButton').addEventListener('click', function() {
-    // Base URL for the Telegram bot
-    const botBaseLink = 'https://t.me/tapper_swap_bot/tapcoin?start=';
+        document.getElementById('inviteButton').addEventListener('click', function() {
+            // Base URL for the Telegram bot
+            const botBaseLink = 'https://t.me/bats_coins_bot?start=';
 
-    // Generate a unique referral ID (this should ideally come from your backend or dynamically generated)
-    const userId = '12345'; // Replace this with actual logic to get the unique user ID
-    const referralLink = botBaseLink + userId;
+            // Fetch user ID from the backend
+            fetch('/api/7533310398:AAGOx3ndkvFg6w_bV6BmbX-MjZV_bVNBGgk') // Replace with your actual API endpoint
+                .then(response => response.json())
+                .then(data => {
+                    const userId = data.userId; // Get userId from the API response
+                    const referralLink = botBaseLink + userId;
 
-    // Display the referral link
-    document.getElementById('referralLink').innerText = referralLink;
+                    // Display the referral link
+                    document.getElementById('referralLink').innerText = referralLink;
 
-    // Update the href for the "Open Bot" link with the referral link
-    document.getElementById('openBotLink').href = referralLink;
+                    // Update the href for the "Open Bot" link with the referral link
+                    document.getElementById('openBotLink').href = referralLink;
 
-    // Show the "Copy Link & Open Bot" button
-    document.getElementById('openBotLink').style.display = 'block';
-});
+                    // Show the "Copy Link & Open Bot" button
+                    document.getElementById('openBotLink').style.display = 'block';
 
-// Copy Referral Link to Clipboard
-document.getElementById('copyLinkButton').addEventListener('click', function() {
-    const referralLink = document.getElementById('referralLink').innerText;
-
-    // Copy referral link to clipboard
-    navigator.clipboard.writeText(referralLink).then(function() {
-        alert('Referral link copied to clipboard!');
-    }, function(err) {
-        console.error('Could not copy text: ', err);
-    });
-});
-
+                    // Copy the referral link to clipboard
+                    navigator.clipboard.writeText(referralLink).then(function() {
+                        alert('Referral link copied to clipboard!');
+                    }, function(err) {
+                        console.error('Could not copy text: ', err);
+                    });
+                })
+                .catch(error => console.error('Error fetching user ID:', error));
+        });
     </script>
 </body>
 </html>
